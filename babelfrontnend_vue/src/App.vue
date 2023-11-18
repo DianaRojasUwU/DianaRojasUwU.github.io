@@ -1,25 +1,24 @@
 <template>
-  <navbar></navbar><br>
-  <nav>
-   
-  </nav>
-  <footer></footer>
-  <router-view/>
+  <Navbar></Navbar>
+  <div class="home">
+    <router-view/>
+  </div>
+  <FooterVue></FooterVue>
 </template>
 
 <script>
-// @ is an alias to /src
-import Navbar from '@/components/Navbar.vue'
-import Footer from './components/Footer.vue';
+import Navbar from '@/components/Navbar.vue';
+import FooterVue from '@/components/Footer.vue';
 
 export default {
   name: 'HomeView',
   components: {
+    FooterVue,
     Navbar,
-    Footer
-  }
+}
 }
 </script>
+
 
 <style>
 #app {
