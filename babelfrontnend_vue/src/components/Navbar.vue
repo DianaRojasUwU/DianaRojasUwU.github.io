@@ -16,6 +16,11 @@
               <a class="nav-link" href="#">Búsqueda Avanzada</a>
             </li>
           </ul>
+          <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link to="/iniciosesion" class="nav-link">Mi cuenta</router-link>
+          </li>
+        </ul>
         </div>
       </div>
     </nav>
