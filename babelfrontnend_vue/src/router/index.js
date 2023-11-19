@@ -16,7 +16,12 @@ const routes = [
     path: '/contacto',
     name: 'contacto',
     component: () => import('../views/contacto.vue')
-  }
+  },
+  {
+    path: '/libros/:id',
+    name: 'detalleLibro',
+    component: () => import('../views/vistapreventa.vue')
+  },
 ]
 
 const router = createRouter({
