@@ -23,7 +23,7 @@
             v-model="email"
           />
           <input
-            type="text"
+            type="password"
             id="password"
             class="fadeIn input-field"
             name="password"
@@ -31,7 +31,7 @@
             v-model="password"
           />
           <input
-            type="text"
+            type="password"
             id="confirmPassword"
             class="fadeIn input-field"
             name="confirmPassword"
@@ -207,7 +207,8 @@ input[type="reset"]:active {
   transform: scale(0.95);
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
