@@ -17,10 +17,16 @@
             </li>
           </ul>
           <ul class="navbar-nav">
-          <li class="nav-item">
-            <router-link to="/iniciosesion" class="nav-link">Mi cuenta</router-link>
-          </li>
-        </ul>
+    <li class="nav-item">
+      <router-link v-if="$store.state.usuario" :to="'/usuario/' + $store.state.usuario" class="nav-link">
+        {{ $store.state.usuario }}
+      </router-link>
+      <router-link v-else to="/iniciosesion" class="nav-link">Mi cuenta</router-link>
+    </li>
+    <li class="nav-item" v-if="$store.state.usuario">
+      <a class="nav-link" @click="cerrarSesion">Cerrar Sesión</a>
+    </li>
+  </ul>
         </div>
       </div>
     </nav>
@@ -80,7 +86,13 @@
     methods: {
       toggleNavbar() {
         this.isNavbarOpen = !this.isNavbarOpen;
-      }
+      },
+      cerrarSesion() {
+      // Llama a la mutación para limpiar el nombre de usuario
+      this.$store.commit('clearUsuario');
+      // Redirige al usuario a la página de inicio o a donde desees
+      this.$router.push('/');
+    },
     }
   }
   </script>

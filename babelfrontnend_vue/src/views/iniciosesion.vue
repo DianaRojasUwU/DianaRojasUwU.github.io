@@ -46,7 +46,31 @@ export default {
       error_msg: "",
     };
   },
-  methods: {},
+  // En Home.vue
+  methods: {
+    async login() {
+      try {
+        // Realiza la consulta a la API para obtener la lista de usuarios
+        const response = await axios.get("https://localhost:7102/api/usuarios");
+
+        // Busca el usuario en la lista
+        const usuarioEncontrado = response.data.find(
+          (u) => u.nombre === this.usuario && u.contrasena === this.password
+        );
+
+        // Si se encuentra el usuario, almacena el nombre en el estado global (Vuex)
+        if (usuarioEncontrado) {
+          this.$store.commit("setUsuario", usuarioEncontrado.nombre);
+          this.$router.push("/");
+        } else {
+          this.error = true;
+          this.error_msg = "Credenciales incorrectas";
+        }
+      } catch (error) {
+        console.error("Error al iniciar sesión", error);
+      }
+    },
+  },
 };
 </script>
 
