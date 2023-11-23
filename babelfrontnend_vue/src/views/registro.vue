@@ -8,35 +8,35 @@
         <form v-on:submit.prevent="register">
           <input
             type="text"
-            id="username"
+            id="nombre"
             class="fadeIn input-field"
-            name="username"
+            name="nombre"
             placeholder="Nombre de usuario"
-            v-model="username"
+            v-model="nombre"
           />
           <input
             type="text"
-            id="email"
+            id="correoElectronico"
             class="fadeIn input-field"
-            name="email"
+            name="correoElectronico"
             placeholder="Correo"
-            v-model="email"
+            v-model="correoElectronico"
           />
           <input
             type="password"
-            id="password"
+            id="contrasena"
             class="fadeIn input-field"
-            name="password"
+            name="contrasena"
             placeholder="Contraseña"
-            v-model="password"
+            v-model="contrasena"
           />
           <input
             type="password"
-            id="confirmPassword"
+            id="confirmarContrasena"
             class="fadeIn input-field"
-            name="confirmPassword"
+            name="confirmarContrasena"
             placeholder="Repetir contraseña"
-            v-model="confirmPassword"
+            v-model="confirmarContrasena"
           />
           <router-link to="/iniciosesion" class="nav-link"
             >Iniciar sesión</router-link
@@ -58,37 +58,58 @@ export default {
   name: "Register",
   data: function () {
     return {
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      nombre: "",
+      correoElectronico: "",
+      contrasena: "",
+      confirmarContrasena: "",      
       error: false,
       error_msg: "",
     };
   },
   methods: {
-    register() {
-      if (this.password !== this.confirmPassword) {
-        this.error = true;
-        this.error_msg = "Las contraseñas no coinciden.";
-      } else {
-        // Lógica para enviar los datos de registro (puedes usar axios u otra librería)
-        // Ejemplo:
-        // axios.post('/api/register', { username: this.username, email: this.email, password: this.password })
-        //   .then(response => {
-        //     console.log(response.data);
-        //     // Puedes redirigir al usuario a la página de inicio de sesión u otra página después del registro exitoso
-        //   })
-        //   .catch(error => {
-        //     console.error(error);
-        //     this.error = true;
-        //     this.error_msg = "Error al registrarse.";
-        //   });
+    async register() {
+   try {
+      if (this.contrasena !== this.confirmarContrasena) {
+         throw new Error("Las contraseñas no coinciden.");
       }
-    },
+
+      const response = await axios.post("https://localhost:7102/api/usuarios", {
+         Nombre: this.nombre,
+         CorreoElectronico: this.correoElectronico,
+         Contrasena: this.contrasena,
+         RolID:2,
+         Rol: { rolID: 0, rolNombre: "" }, // Ajusta el nombre del rol según tu modelo
+      });
+
+      console.log(response.data);
+      this.$router.push("/iniciosesion");
+   } catch (error) {
+      console.error(error);
+
+      if (error.response) {
+         console.error("Respuesta del servidor:", error.response.data);
+         console.error("Código de estado:", error.response.status);
+         console.error("Detalles específicos de los errores:", error.response.data.errors);
+         this.error_msg = "Error al registrarse: " + JSON.stringify(error.response.data.errors);
+      } else if (error.request) {
+         console.error("No se recibió respuesta del servidor");
+         this.error_msg = "Error al registrarse: No se recibió respuesta del servidor";
+      } else {
+         console.error("Error durante la configuración de la solicitud", error.message);
+         this.error_msg = "Error al registrarse: " + error.message;
+      }
+
+      this.error = true;
+   }
+}
+
+
+
+
   },
 };
 </script>
+
 
 <style scoped>
 /* BASIC */

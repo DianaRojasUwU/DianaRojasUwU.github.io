@@ -38,10 +38,10 @@
         <img id="Icono" class="img-fluid" src="@/assets/logo.png" alt="Icono" />
       </span>
       <!-- Barra de búsqueda -->
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
+      <form class="d-flex" @submit.prevent="buscarLibros">
+  <input type="text" v-model="buscar" class="form-control" placeholder=""/> 
+  <button class="btn btn-outline-success" type="submit">Buscar</button>
+</form>
     </div>
   </nav>
   <div></div>
@@ -75,28 +75,51 @@
     </nav>
 </template>
   
-  <script>
-  export default {
-    name: 'Icono',
-    data() {
-      return {
-        isNavbarOpen: false
-      };
+<script>
+export default {
+  name: 'Icono',
+  created() {
+    // Llama a la acción para cargar la lista de libros cuando se crea el componente
+    this.$store.dispatch('cargarLibros');
+  },
+  data() {
+    return {
+      isNavbarOpen: false,
+    };
+  },
+  computed: {
+    libros() {
+      return this.$store.state.libros || [];
     },
-    methods: {
-      toggleNavbar() {
-        this.isNavbarOpen = !this.isNavbarOpen;
-      },
-      cerrarSesion() {
+  },
+  methods: {
+    toggleNavbar() {
+      this.isNavbarOpen = !this.isNavbarOpen;
+    },
+    cerrarSesion() {
       // Llama a la mutación para limpiar el nombre de usuario
       this.$store.commit('clearUsuario');
       // Redirige al usuario a la página de inicio o a donde desees
       this.$router.push('/');
     },
-    }
+    buscarLibros() {
+  // Verifica si la lista de libros está definida en el estado de la tienda
+  if (this.$store.state.libros) {
+    // Filtra la lista completa de libros localmente según la búsqueda
+    const librosFiltrados = this.$store.state.libros.filter(libro => {
+      return libro.titulo.toLowerCase().includes(this.buscar.toLowerCase());
+    });
+
+    // Redirige a la vista de resultados y pasa los libros filtrados como parámetro de consulta
+    this.$router.push({ name: 'resultadosbusqueda', query: { libros: JSON.stringify(librosFiltrados) } });
+  } else {
+    console.error('La lista de libros no está definida en el estado de la tienda.');
+    // Puedes manejar esto de acuerdo a tus necesidades, por ejemplo, mostrando un mensaje al usuario.
   }
-  </script>
-  
+},
+  },
+};
+</script>
   <style scoped>
   .bg-custom {
     background-color: #3C5154;

@@ -32,6 +32,11 @@ const routes = [
     name: 'detalleLibro',
     component: () => import('../views/vistapreventa.vue')
   },
+  {
+  path: '/resultados',
+  name: 'resultadosbusqueda',
+  component: () => import('../views/ResultadosBusqueda.vue')
+},
 ]
 
 const router = createRouter({

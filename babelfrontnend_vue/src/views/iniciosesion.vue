@@ -15,7 +15,7 @@
             v-model="usuario"
           />
           <input
-            type="text"
+            type="password"
             id="password"
             class="fadeIn third"
             name="login"
@@ -191,7 +191,8 @@ input[type="reset"]:active {
   transform: scale(0.95);
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
