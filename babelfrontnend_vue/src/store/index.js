@@ -43,34 +43,36 @@ export default createStore({
         console.warn('El carrito está vacío. No se puede realizar la compra.');
         return;
       }
-    
+
+      // Calcular el número total de libros comprados en el carrito
+      const totalLibrosComprados = state.carrito.length;
+
       // Realizar la lógica de compra para cada libro en el carrito
       for (const libro of state.carrito) {
         try {
           // Realizar una solicitud PUT para actualizar la cantidad en stock
-          // Ajusta la URL según la estructura de tu API y el formato de la solicitud PUT
           await axios.put(`https://localhost:7102/api/libros/${libro.id}`, {
-  id: libro.id,
-  titulo: libro.titulo,
-  autor: libro.autor,
-  descripcion: libro.descripcion,
-  precio: libro.precio,
-  stock: libro.stock - 1,
-  categoriaID: libro.categoriaID,
-  categoria: {
-    id: libro.categoria.id,
-    nombre: libro.categoria.nombre,
-  },
-});
-    
+            id: libro.id,
+            titulo: libro.titulo,
+            autor: libro.autor,
+            descripcion: libro.descripcion,
+            precio: libro.precio,
+            stock: libro.stock - totalLibrosComprados,
+            categoriaID: libro.categoriaID,
+            categoria: {
+              id: libro.categoria.id,
+              nombre: libro.categoria.nombre,
+            },
+          });
+
           // Realizar una solicitud GET para obtener la información actualizada del libro
           const response = await axios.get(`https://localhost:7102/api/libros/${libro.id}`);
           const libroActualizado = response.data;
-    
+
           // Verificar si la obtención del libro fue exitosa antes de continuar
           if (response.status === 200) {
             // Realizar acciones adicionales si es necesario
-    
+
             // Quitar el libro antiguo del carrito y agregar el libro actualizado
             commit('quitarDelCarrito', libro.id);
             commit('agregarAlCarrito', libroActualizado);
@@ -79,16 +81,18 @@ export default createStore({
           }
         } catch (error) {
           console.error('Error al realizar la compra del libro:', error);
-    
+
           if (error.response) {
-            console.error('Detalles del error:', error.response.data); // Agregado para mostrar detalles del error
+            console.error('Detalles del error:', error.response.data);
           }
         }
       }
-    
+
       // Después de la compra, puedes limpiar el carrito
       commit('limpiarCarrito');
+      window.location.reload();
+
     },
-    
+
   },
 });

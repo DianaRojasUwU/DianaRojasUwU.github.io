@@ -13,6 +13,7 @@
         </div>
         <div class="col-md-3 col-12 text-center detalles-adicionales">
           <p class="precio mb-3">Precio: {{ libro.precio }}</p>
+          <p class="precio mb-3">Stock: {{ libro.stock }}</p>
           <button class="btn btn-primary btn-comprar" @click="comprarLibro" :disabled="libro.stock === 0">Comprar</button>
           <button class="btn btn-outline-secondary btn-agregar-carrito" @click="agregarAlCarrito" :disabled="libro.stock === 0">Agregar al carrito</button>
           <p v-if="libro.stock === 0" class="agotado">¡Agotado!</p>
@@ -47,9 +48,13 @@
         }
       },
       comprarLibro() {
-    // Llama a la acción para realizar la compra
-    this.$store.dispatch('comprarLibro');
-  },
+      // Llama a la acción para realizar la compra
+      this.$store.dispatch('comprarLibro')
+        .then(() => {
+          // Después de la compra, emite un evento para recargar la información
+          this.$emit('compraExitosa');
+        });
+    },
 
   agregarAlCarrito() {
     // Llama a la mutación para agregar el libro al carrito
