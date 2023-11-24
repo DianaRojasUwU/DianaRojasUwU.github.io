@@ -6,7 +6,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
-  },  
+  },
   {
     path: '/iniciosesion',
     name: 'iniciosesion',
@@ -33,10 +33,15 @@ const routes = [
     component: () => import('../views/vistapreventa.vue')
   },
   {
-  path: '/resultados',
-  name: 'resultadosbusqueda',
-  component: () => import('../views/ResultadosBusqueda.vue')
-},
+    path: '/resultados',
+    name: 'resultadosbusqueda',
+    component: () => import('../views/ResultadosBusqueda.vue')
+  },
+  {
+    path: '/Carrito',
+    name: 'Carrito',
+    component: () => import('../views/carrito.vue')
+  },
 ]
 
 const router = createRouter({

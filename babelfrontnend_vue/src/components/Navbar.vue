@@ -16,9 +16,11 @@
               <a class="nav-link" href="#">Búsqueda Avanzada</a>
             </li>
           </ul>
+          <!-- Puedes mostrar la cantidad de elementos en el carrito en la barra de navegación -->
+          <router-link to="/carrito" class="nav-link">Carrito ({{ $store.state.carrito.length }})</router-link>
           <ul class="navbar-nav">
-    <li class="nav-item">
-      <router-link v-if="$store.state.usuario" :to="'/usuario/' + $store.state.usuario" class="nav-link">
+            <li class="nav-item">
+              <router-link v-if="$store.state.usuario" :to="'/usuario/' + $store.state.usuario" class="nav-link">
         {{ $store.state.usuario }}
       </router-link>
       <router-link v-else to="/iniciosesion" class="nav-link">Mi cuenta</router-link>

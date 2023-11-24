@@ -48,6 +48,10 @@ export default {
     getStockText(stock) {
       return stock > 0 ? 'Con Stock' : 'Sin Stock';
     },
+    agregarAlCarrito() {
+    // Llama a la mutación para agregar el libro al carrito
+    this.$store.commit('agregarAlCarrito', this.libro);
+  },
   },
 };
 </script>

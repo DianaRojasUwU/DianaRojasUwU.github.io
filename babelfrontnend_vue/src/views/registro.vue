@@ -6,41 +6,15 @@
           <img src="@/assets/logo.png" id="icon" alt="User Icon" />
         </div>
         <form v-on:submit.prevent="register">
-          <input
-            type="text"
-            id="nombre"
-            class="fadeIn input-field"
-            name="nombre"
-            placeholder="Nombre de usuario"
-            v-model="nombre"
-          />
-          <input
-            type="text"
-            id="correoElectronico"
-            class="fadeIn input-field"
-            name="correoElectronico"
-            placeholder="Correo"
-            v-model="correoElectronico"
-          />
-          <input
-            type="password"
-            id="contrasena"
-            class="fadeIn input-field"
-            name="contrasena"
-            placeholder="Contraseña"
-            v-model="contrasena"
-          />
-          <input
-            type="password"
-            id="confirmarContrasena"
-            class="fadeIn input-field"
-            name="confirmarContrasena"
-            placeholder="Repetir contraseña"
-            v-model="confirmarContrasena"
-          />
-          <router-link to="/iniciosesion" class="nav-link"
-            >Iniciar sesión</router-link
-          >
+          <input type="text" id="nombre" class="fadeIn input-field" name="nombre" placeholder="Nombre de usuario"
+            v-model="nombre" />
+          <input type="text" id="correoElectronico" class="fadeIn input-field" name="correoElectronico"
+            placeholder="Correo" v-model="correoElectronico" />
+          <input type="password" id="contrasena" class="fadeIn input-field" name="contrasena" placeholder="Contraseña"
+            v-model="contrasena" />
+          <input type="password" id="confirmarContrasena" class="fadeIn input-field" name="confirmarContrasena"
+            placeholder="Repetir contraseña" v-model="confirmarContrasena" />
+          <router-link to="/iniciosesion" class="nav-link">Iniciar sesión</router-link>
           <input type="submit" class="fadeIn input-field" value="Registrarse" />
         </form>
         <div class="alert alert-danger" role="alert" v-if="error">
@@ -61,51 +35,47 @@ export default {
       nombre: "",
       correoElectronico: "",
       contrasena: "",
-      confirmarContrasena: "",      
+      confirmarContrasena: "",
       error: false,
       error_msg: "",
     };
   },
   methods: {
     async register() {
-   try {
-      if (this.contrasena !== this.confirmarContrasena) {
-         throw new Error("Las contraseñas no coinciden.");
+      try {
+        if (this.contrasena !== this.confirmarContrasena) {
+          throw new Error("Las contraseñas no coinciden.");
+        }
+
+        const response = await axios.post("https://localhost:7102/api/usuarios", {
+          Nombre: this.nombre,
+          CorreoElectronico: this.correoElectronico,
+          Contrasena: this.contrasena,
+          RolID: 2,
+          Rol: { rolID: 0, rolNombre: "" }, // Ajusta el nombre del rol según tu modelo
+        });
+
+        console.log(response.data);
+        this.$router.push("/iniciosesion");
+      } catch (error) {
+        console.error(error);
+
+        if (error.response) {
+          console.error("Respuesta del servidor:", error.response.data);
+          console.error("Código de estado:", error.response.status);
+          console.error("Detalles específicos de los errores:", error.response.data.errors);
+          this.error_msg = "Error al registrarse: " + JSON.stringify(error.response.data.errors);
+        } else if (error.request) {
+          console.error("No se recibió respuesta del servidor");
+          this.error_msg = "Error al registrarse: No se recibió respuesta del servidor";
+        } else {
+          console.error("Error durante la configuración de la solicitud", error.message);
+          this.error_msg = "Error al registrarse: " + error.message;
+        }
+
+        this.error = true;
       }
-
-      const response = await axios.post("https://localhost:7102/api/usuarios", {
-         Nombre: this.nombre,
-         CorreoElectronico: this.correoElectronico,
-         Contrasena: this.contrasena,
-         RolID:2,
-         Rol: { rolID: 0, rolNombre: "" }, // Ajusta el nombre del rol según tu modelo
-      });
-
-      console.log(response.data);
-      this.$router.push("/iniciosesion");
-   } catch (error) {
-      console.error(error);
-
-      if (error.response) {
-         console.error("Respuesta del servidor:", error.response.data);
-         console.error("Código de estado:", error.response.status);
-         console.error("Detalles específicos de los errores:", error.response.data.errors);
-         this.error_msg = "Error al registrarse: " + JSON.stringify(error.response.data.errors);
-      } else if (error.request) {
-         console.error("No se recibió respuesta del servidor");
-         this.error_msg = "Error al registrarse: No se recibió respuesta del servidor";
-      } else {
-         console.error("Error durante la configuración de la solicitud", error.message);
-         this.error_msg = "Error al registrarse: " + error.message;
-      }
-
-      this.error = true;
-   }
-}
-
-
-
-
+    }
   },
 };
 </script>
@@ -277,6 +247,7 @@ input[type="text"]:placeholder {
     -webkit-transform: translate3d(0, -100%, 0);
     transform: translate3d(0, -100%, 0);
   }
+
   100% {
     opacity: 1;
     -webkit-transform: none;
@@ -290,6 +261,7 @@ input[type="text"]:placeholder {
     -webkit-transform: translate3d(0, -100%, 0);
     transform: translate3d(0, -100%, 0);
   }
+
   100% {
     opacity: 1;
     -webkit-transform: none;
@@ -302,22 +274,27 @@ input[type="text"]:placeholder {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 @-moz-keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

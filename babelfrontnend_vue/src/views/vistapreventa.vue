@@ -47,11 +47,14 @@
         }
       },
       comprarLibro() {
-        // Implementar lógica de compra aquí
-      },
-      agregarAlCarrito() {
-        // Implementar lógica para agregar al carrito aquí
-      },
+    // Llama a la acción para realizar la compra
+    this.$store.dispatch('comprarLibro');
+  },
+
+  agregarAlCarrito() {
+    // Llama a la mutación para agregar el libro al carrito
+    this.$store.commit('agregarAlCarrito', this.libro);
+  },
     },
   };
   </script>
