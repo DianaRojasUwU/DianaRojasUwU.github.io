@@ -5,7 +5,9 @@
         <div class="fadeIn first">
           <img src="@/assets/logo.png" id="icon" alt="User Icon" />
         </div>
+        <!-- Formulario de inicio de sesión -->
         <form v-on:submit.prevent="login">
+          <!-- Campos de usuario y contraseña -->
           <input
             type="text"
             id="login"
@@ -22,9 +24,12 @@
             placeholder="Contraseña"
             v-model="password"
           />
+          <!-- Enlace para redirigir a la página de registro -->
           <router-link to="/registro" class="nav-link">Registrarse</router-link>
+          <!-- Botón para enviar el formulario -->
           <input type="submit" class="fadeIn fourth" value="Iniciar sesión" />
         </form>
+        <!-- Mensaje de error en caso de credenciales incorrectas -->
         <div class="alert alert-danger" role="alert" v-if="error">
           {{ error_msg }}
         </div>
@@ -46,7 +51,6 @@ export default {
       error_msg: "",
     };
   },
-  // En Home.vue
   methods: {
     async login() {
       try {
@@ -58,11 +62,12 @@ export default {
           (u) => u.nombre === this.usuario && u.contrasena === this.password
         );
 
-        // Si se encuentra el usuario, almacena el nombre en el estado global (Vuex)
+        // Si se encuentra el usuario, almacena el nombre en el estado global (Vuex) y redirige a la página principal
         if (usuarioEncontrado) {
           this.$store.commit("setUsuario", usuarioEncontrado.nombre);
           this.$router.push("/");
         } else {
+          // Si no se encuentra el usuario, muestra un mensaje de error
           this.error = true;
           this.error_msg = "Credenciales incorrectas";
         }
@@ -73,6 +78,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 /* BASIC */

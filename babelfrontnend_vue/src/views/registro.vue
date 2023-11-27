@@ -5,7 +5,9 @@
         <div class="fadeIn first">
           <img src="@/assets/logo.png" id="icon" alt="User Icon" />
         </div>
+        <!-- Formulario de registro -->
         <form v-on:submit.prevent="register">
+          <!-- Campos de nombre de usuario, correo electrónico y contraseña -->
           <input type="text" id="nombre" class="fadeIn input-field" name="nombre" placeholder="Nombre de usuario"
             v-model="nombre" />
           <input type="text" id="correoElectronico" class="fadeIn input-field" name="correoElectronico"
@@ -14,9 +16,12 @@
             v-model="contrasena" />
           <input type="password" id="confirmarContrasena" class="fadeIn input-field" name="confirmarContrasena"
             placeholder="Repetir contraseña" v-model="confirmarContrasena" />
+          <!-- Enlace para redirigir a la página de inicio de sesión -->
           <router-link to="/iniciosesion" class="nav-link">Iniciar sesión</router-link>
+          <!-- Botón para enviar el formulario de registro -->
           <input type="submit" class="fadeIn input-field" value="Registrarse" />
         </form>
+        <!-- Mensaje de error en caso de problemas durante el registro -->
         <div class="alert alert-danger" role="alert" v-if="error">
           {{ error_msg }}
         </div>
@@ -43,10 +48,12 @@ export default {
   methods: {
     async register() {
       try {
+        // Verifica si las contraseñas coinciden
         if (this.contrasena !== this.confirmarContrasena) {
           throw new Error("Las contraseñas no coinciden.");
         }
 
+        // Realiza una solicitud POST para registrar al usuario en la API
         const response = await axios.post("https://localhost:7102/api/usuarios", {
           Nombre: this.nombre,
           CorreoElectronico: this.correoElectronico,
@@ -56,10 +63,13 @@ export default {
         });
 
         console.log(response.data);
+        
+        // Redirige a la página de inicio de sesión después del registro exitoso
         this.$router.push("/iniciosesion");
       } catch (error) {
         console.error(error);
 
+        // Maneja los diferentes tipos de errores y muestra mensajes específicos
         if (error.response) {
           console.error("Respuesta del servidor:", error.response.data);
           console.error("Código de estado:", error.response.status);
@@ -79,6 +89,7 @@ export default {
   },
 };
 </script>
+
 
 
 <style scoped>

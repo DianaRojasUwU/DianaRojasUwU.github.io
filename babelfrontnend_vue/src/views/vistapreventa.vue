@@ -1,53 +1,66 @@
 <template>
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col-md-3 col-12 text-center">
-          <img src="../assets/enigmanocturno.jpg" alt="Portada del libro" class="img-fluid libro-imagen" />
-        </div>
-        <div class="col-md-6 col-12 text-center">
-          <div class="detalle-libro">
-            <h1>{{ libro.titulo }}</h1>
-            <p class="autor">Autor: {{ libro.autor }}</p>
-            <p class="descripcion">{{ libro.descripcion }}</p>
-          </div>
-        </div>
-        <div class="col-md-3 col-12 text-center detalles-adicionales">
-          <p class="precio mb-3">Precio: {{ libro.precio }}</p>
-          <p class="precio mb-3">Stock: {{ libro.stock }}</p>
-          <button class="btn btn-primary btn-comprar" @click="comprarLibro" :disabled="libro.stock === 0">Comprar</button>
-          <button class="btn btn-outline-secondary btn-agregar-carrito" @click="agregarAlCarrito" :disabled="libro.stock === 0">Agregar al carrito</button>
-          <p v-if="libro.stock === 0" class="agotado">¡Agotado!</p>
+  <div class="container mt-4">
+    <div class="row">
+      <!-- Columna para la imagen del libro -->
+      <div class="col-md-3 col-12 text-center">
+        <img src="../assets/enigmanocturno.jpg" alt="Portada del libro" class="img-fluid libro-imagen" />
+      </div>
+      
+      <!-- Columna para la información del libro -->
+      <div class="col-md-6 col-12 text-center">
+        <div class="detalle-libro">
+          <h1>{{ libro.titulo }}</h1>
+          <p class="autor">Autor: {{ libro.autor }}</p>
+          <p class="descripcion">{{ libro.descripcion }}</p>
         </div>
       </div>
+      
+      <!-- Columna para detalles adicionales y botones de compra -->
+      <div class="col-md-3 col-12 text-center detalles-adicionales">
+        <p class="precio mb-3">Precio: {{ libro.precio }}</p>
+        <p class="precio mb-3">Stock: {{ libro.stock }}</p>
+        
+        <!-- Botón para comprar el libro -->
+        <button class="btn btn-primary btn-comprar" @click="comprarLibro" :disabled="libro.stock <= 0">Comprar</button>
+        
+        <!-- Botón para agregar al carrito -->
+        <button class="btn btn-outline-secondary btn-agregar-carrito" @click="agregarAlCarrito" :disabled="libro.stock <= 0">Agregar al carrito</button>
+        
+        <!-- Mensaje si el libro está agotado -->
+        <p v-if="libro.stock <= 0" class="agotado">¡Agotado!</p>
+      </div>
     </div>
-  </template>
-  
-  <script>
-  import axios from "axios";
-  
-  export default {
-    data() {
-      return {
-        libro: {},
-      };
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      libro: {},
+    };
+  },
+  mounted() {
+    this.obtenerDetalleLibro();
+  },
+  methods: {
+    // Método para obtener detalles del libro desde la API
+    async obtenerDetalleLibro() {
+      try {
+        const libroId = this.$route.params.id;
+        const response = await axios.get(
+          `https://localhost:7102/api/libros/${libroId}`
+        );
+        this.libro = response.data;
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error al obtener detalles del libro:", error);
+      }
     },
-    mounted() {
-      this.obtenerDetalleLibro();
-    },
-    methods: {
-      async obtenerDetalleLibro() {
-        try {
-          const libroId = this.$route.params.id;
-          const response = await axios.get(
-            `https://localhost:7102/api/libros/${libroId}`
-          );
-          this.libro = response.data;
-          console.log(response.data);
-        } catch (error) {
-          console.error("Error al obtener detalles del libro:", error);
-        }
-      },
-      comprarLibro() {
+    // Método para comprar el libro
+    comprarLibro() {
       // Llama a la acción para realizar la compra
       this.$store.dispatch('comprarLibro')
         .then(() => {
@@ -55,14 +68,15 @@
           this.$emit('compraExitosa');
         });
     },
-
-  agregarAlCarrito() {
-    // Llama a la mutación para agregar el libro al carrito
-    this.$store.commit('agregarAlCarrito', this.libro);
-  },
+    // Método para agregar el libro al carrito
+    agregarAlCarrito() {
+      // Llama a la mutación para agregar el libro al carrito
+      this.$store.commit('agregarAlCarrito', this.libro);
     },
-  };
-  </script>
+  },
+};
+</script>
+
   
   <style scoped>
   .detalle-libro {

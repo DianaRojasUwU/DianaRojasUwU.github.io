@@ -8,21 +8,27 @@ export default createStore({
     carrito: [],
   },
   mutations: {
+    // Mutación para establecer la lista de libros en el estado
     setLibros(state, libros) {
       state.libros = libros;
     },
+    // Mutación para establecer el usuario en el estado
     setUsuario(state, usuario) {
       state.usuario = usuario;
     },
+    // Mutación para limpiar el usuario del estado
     clearUsuario(state) {
       state.usuario = null;
     },
+    // Mutación para agregar un libro al carrito
     agregarAlCarrito(state, libro) {
       state.carrito.push(libro);
     },
+    // Mutación para quitar un libro del carrito por su ID
     quitarDelCarrito(state, libroId) {
       state.carrito = state.carrito.filter(libro => libro.id !== libroId);
     },
+    // Mutación para limpiar el carrito
     limpiarCarrito(state) {
       state.carrito = [];
     },
@@ -37,6 +43,7 @@ export default createStore({
         console.error('Error al cargar la lista de libros:', error);
       }
     },
+    // Acción para realizar la compra de libros en el carrito
     async comprarLibro({ state, commit }) {
       // Verificar si hay libros en el carrito
       if (state.carrito.length === 0) {
@@ -90,9 +97,7 @@ export default createStore({
 
       // Después de la compra, puedes limpiar el carrito
       commit('limpiarCarrito');
-      window.location.reload();
-
+      window.location.reload(); // Esto recarga la página, considera otras opciones según tus necesidades
     },
-
   },
 });
