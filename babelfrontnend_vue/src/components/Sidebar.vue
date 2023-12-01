@@ -22,6 +22,11 @@
             <span class="text">Libros</span>
           </router-link>
         </li>
+        <li class="">
+          <router-link to="/vistaAdmin/ListarEventoNoticia" class="button">
+            <span class="text">Eventos y Noticias</span>
+          </router-link>
+        </li>
       </ul>
     </nav>
 

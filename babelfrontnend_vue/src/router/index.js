@@ -120,6 +120,18 @@ const routes = [
         path: 'EditarLibro/:id',
         component: () => import('../components/Libro/EditarLibro.vue')
       },
+      {
+        path: 'ListarEventoNoticia',
+        component: () => import('../components/EventoNoticia/ListarEventoNoticia.vue')
+      },
+      {
+        path: 'AgregarEventoNoticia',
+        component: () => import('../components/EventoNoticia/AgregarEventoNoticia.vue')
+      },
+      {
+        path: '/EditarEventoNoticia/:id',
+        component: () => import('../components/EventoNoticia/EditarEventoNoticia.vue')
+      },      
     ],
   },
 ]
