@@ -7,7 +7,7 @@
       </div>
 
       <ul class="list-unstyled components">
-        <li class="active">
+        <li class="">
           <router-link to="/vistaAdmin/ListarUsuario" class="button">
             <span class="text">Usuarios</span>
           </router-link>
@@ -47,25 +47,24 @@ export default {
 };
 </script>
 
+
 <style scoped>
 #app {
   display: flex;
 }
 
 #sidebar {
-  height: 100%;
-  position: absolute;
   width: 250px;
   background: #fff;
   padding-top: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   transition: width 0.3s ease, border-radius 0.3s ease;
-  border-radius: 10px; /* Ajusta según tu preferencia */
 }
 
 #sidebar:hover {
   width: 280px;
-  border-radius: 15px; /* Ajusta según tu preferencia */
+  border-radius: 15px;
 }
 
 #sidebar .sidebar-header {
@@ -96,12 +95,33 @@ export default {
 }
 
 #content {
+  margin-top: 20px;
   margin-left: 250px;
   padding: 20px;
   transition: margin-left 0.3s ease;
 }
 
-#sidebar:hover + #content {
-  margin-left: 280px;
+@media (max-width: 768px) {
+  #app {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #sidebar {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    position: static;
+    padding-top: 10px;
+  }
+
+  #sidebar:hover {
+    width: 100%;
+  }
+
+  #content {
+    margin-top: 0;
+    margin-left: 0;
+  }
 }
 </style>

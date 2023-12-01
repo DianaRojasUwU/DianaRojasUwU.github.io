@@ -1,13 +1,15 @@
 <template>
-  <Navbar></Navbar>
-  <div class="home">
-  <br>
-  <div class="home container"> <!-- Agregamos la clase "container" -->
-      <router-view/>
+  <div id="app">
+    <Navbar></Navbar>
+    <div class="home">
+      <br>
+      <div class="container">
+        <router-view/>
+      </div>
+      <br>
     </div>
-  <br>
+    <FooterVue></FooterVue>
   </div>
-  <FooterVue></FooterVue>
 </template>
 
 <script>
@@ -19,14 +21,15 @@ export default {
   components: {
     FooterVue,
     Navbar,
-}
+  }
 }
 </script>
 
-
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Avenir', 'Helvetica', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -34,7 +37,7 @@ export default {
 }
 
 nav {
-  padding: 30px;
+  padding: 1rem;
 }
 
 nav a {
@@ -44,5 +47,19 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.home .container {
+  padding: 1rem; /* Ajuste el espaciado según sus necesidades */
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0.5rem; /* Espaciado reducido en dispositivos móviles */
+  }
+
+  .home .container {
+    padding: 0.5rem; /* Espaciado reducido en dispositivos móviles */
+  }
 }
 </style>
