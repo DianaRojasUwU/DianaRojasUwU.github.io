@@ -1,9 +1,9 @@
 <template>
     <div class="container">
       <div class="card">
-        <div class="card-header">Agregar Cliente</div>
+        <div class="card-header">Agregar Usuario</div>
         <div class="card-body">
-          <form v-on:submit.prevent="agregarCliente">
+          <form v-on:submit.prevent="agregarUsuario">
             <div class="form-group">
               <label for="nombre">Nombre:</label>
               <input
@@ -77,7 +77,7 @@
       };
     },
     methods: {
-      agregarCliente() {
+      agregarUsuario() {
         // Verifica que form.rol sea un número (ID del rol)
         if (typeof this.form.rol !== 'number') {
           // Puedes mostrar un mensaje de error o manejarlo de acuerdo a tus necesidades
