@@ -37,7 +37,7 @@
     data() {
       return {
         form: {
-          rolID: null, // Este campo permanece nulo ya que suele ser asignado automáticamente por la base de datos
+          rolID: 0, // Este campo permanece nulo ya que suele ser asignado automáticamente por la base de datos
           rolNombre: "",
         },
       };

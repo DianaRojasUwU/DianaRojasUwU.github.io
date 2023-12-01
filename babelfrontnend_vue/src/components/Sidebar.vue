@@ -17,6 +17,11 @@
             <span class="text">Roles</span>
           </router-link>
         </li>
+        <li class="">
+          <router-link to="/vistaAdmin/ListarLibro" class="button">
+            <span class="text">Libros</span>
+          </router-link>
+        </li>
       </ul>
     </nav>
 

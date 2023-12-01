@@ -108,6 +108,18 @@ const routes = [
         path: '/EditarRol/:id',
         component: () => import('../components/Rol/EditarRol.vue')
       },
+      {
+        path: 'ListarLibro',
+        component: () => import('../components/Libro/ListarLibro.vue')
+      },
+      {
+        path: 'AgregarLibro',
+        component: () => import('../components/Libro/AgregarLibro.vue')
+      },
+      {
+        path: 'EditarLibro/:id',
+        component: () => import('../components/Libro/EditarLibro.vue')
+      },
     ],
   },
 ]
