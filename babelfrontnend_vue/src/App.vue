@@ -2,7 +2,9 @@
   <Navbar></Navbar>
   <div class="home">
   <br>
-    <router-view/>
+  <div class="home container"> <!-- Agregamos la clase "container" -->
+      <router-view/>
+    </div>
   <br>
   </div>
   <FooterVue></FooterVue>

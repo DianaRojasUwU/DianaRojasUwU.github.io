@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import axios from 'axios';
 
 const routes = [
   {
@@ -41,6 +42,73 @@ const routes = [
     path: '/Carrito',
     name: 'Carrito',
     component: () => import('../views/carrito.vue')
+  },
+  {
+    path: '/usuario/:nombre',
+    name: 'usuario',
+    component: () => import('../views/usuario.vue'),
+    props: true,
+    beforeEnter: async (to, from, next) => {
+      try {
+        // Hacer la llamada a la API para obtener la lista de usuarios
+        const response = await axios.get('https://localhost:7102/api/usuarios');
+        const usuarios = response.data;
+    
+        // Buscar el usuario específico por nombre
+        const usuario = usuarios.find(u => u.nombre === to.params.nombre);
+    
+        if (usuario) {
+          // Verificar el rol del usuario
+          if (usuario.rol && usuario.rol.rolNombre !== 'admin') {
+            // Continuar con la navegación si el rol no es admin
+            next();
+          } else {
+            // Redirigir a otra vista si el rol es admin
+            next({ name: 'vistaAdmin' }); // Cambia 'adminView' al nombre de tu vista para admin
+          }
+        } else {
+          // Manejar el caso en el que no se encuentra el usuario
+          console.error('Usuario no encontrado');
+          // Puedes redirigir a una página de error o a otra vista según tus necesidades
+          next({ name: 'usuarioNoEncontrado' });
+        }
+      } catch (error) {
+        console.error('Error al obtener la lista de usuarios', error);
+        // Manejar el error según tus necesidades
+        next();
+      }
+    }
+  },
+  {
+    path: '/vistaAdmin',
+    name: 'vistaAdmin',
+    component: () => import('../views/vistaAdmin.vue'),
+    children: [
+      {
+        path: 'ListarUsuario',
+        component: () => import('../components/Usuario/ListarUsuario.vue')
+      },
+      {
+        path: 'AgregarUsuario',
+        component: () => import('../components/Usuario/AgregarUsuario.vue')
+      },
+      {
+        path: '/EditarUsuario/:id',
+        component: () => import('../components/Usuario/EditarUsuario.vue')
+      },
+      {
+        path: 'ListarRol',
+        component: () => import('../components/Rol/ListarRol.vue')
+      },
+      {
+        path: 'AgregarRol',
+        component: () => import('../components/Rol/AgregarRol.vue')
+      },
+      {
+        path: '/EditarRol/:id',
+        component: () => import('../components/Rol/EditarRol.vue')
+      },
+    ],
   },
 ]
 
