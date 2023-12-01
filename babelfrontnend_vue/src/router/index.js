@@ -131,6 +131,22 @@ const routes = [
       {
         path: '/EditarEventoNoticia/:id',
         component: () => import('../components/EventoNoticia/EditarEventoNoticia.vue')
+      },   
+      {
+        path: 'EditarLibro/:id',
+        component: () => import('../components/Libro/EditarLibro.vue')
+      },
+      {
+        path: 'ListarCategoria',
+        component: () => import('../components/Categoria/ListarCategoria.vue')
+      },
+      {
+        path: 'AgregarCategoria',
+        component: () => import('../components/Categoria/AgregarCategoria.vue')
+      },
+      {
+        path: '/EditarCategoria/:id',
+        component: () => import('../components/Categoria/EditarCategoria.vue')
       },      
     ],
   },

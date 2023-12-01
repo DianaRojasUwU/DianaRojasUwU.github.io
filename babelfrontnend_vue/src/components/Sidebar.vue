@@ -27,6 +27,11 @@
             <span class="text">Eventos y Noticias</span>
           </router-link>
         </li>
+        <li class="">
+          <router-link to="/vistaAdmin/ListarCategoria" class="button">
+            <span class="text">Categorias</span>
+          </router-link>
+        </li>
       </ul>
     </nav>
 
