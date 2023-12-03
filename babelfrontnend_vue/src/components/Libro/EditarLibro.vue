@@ -130,6 +130,7 @@ export default {
         titulo: "",
         autor: "",
         descripcion: "",
+        imagen:"",
         precio: 0,
         stock: 0,
         categoriaID: 0,
@@ -150,6 +151,7 @@ export default {
           titulo: this.form.titulo,
           autor: this.form.autor,
           descripcion: this.form.descripcion,
+          imagen: this.form.imagen,
           precio: this.form.precio,
           stock: this.form.stock,
           categoriaID: this.form.categoriaID, 
@@ -160,7 +162,7 @@ export default {
         })
         .then(data => {
           console.log(data);
-          this.$router.push("/vistaAdmin/ListarUsuario");
+          this.$router.push("/vistaAdmin/ListarLibro");
         })
         .catch(error => {
           console.error(error.response.data);
@@ -176,6 +178,7 @@ export default {
         this.form.titulo = response.data.titulo;
         this.form.autor = response.data.autor;
         this.form.descripcion = response.data.descripcion;
+        this.form.imagen = response.data.imagen;
         this.form.precio = response.data.precio;
         this.form.stock = response.data.stock;
         this.form.categoriaID = response.data.categoria.id;

@@ -20,6 +20,7 @@
                 <th>Título</th>
                 <th>Autor</th>
                 <th>Descripción</th>
+                <th>Imagen</th>
                 <th>Precio</th>
                 <th>Stock</th>
                 <th>Categoría</th>
@@ -33,6 +34,7 @@
                 <td>{{ libro.titulo }}</td>
                 <td>{{ libro.autor }}</td>
                 <td>{{ libro.descripcion }}</td>
+                <td>{{ libro.imagen }}</td>
                 <td>{{ libro.precio }}</td>
                 <td>{{ libro.stock }}</td>
                 <td>{{ libro.categoria.nombre }}</td>

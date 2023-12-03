@@ -43,6 +43,19 @@
               <small id="helpId" class="form-text" text-muted>Ingresa la descripción del libro</small>
             </div><br>
             <div class="form-group">
+              <label for="enlace">Imagen:</label>
+              <input
+                type="text"
+                class="form-control"
+                name="imagen"
+                v-model="form.imagen"
+                aria-describedby="helpId"
+                id="imagen"
+                placeholder="URL de la imagen"
+              />
+              <small id="helpId" class="form-text" text-muted>Ingresa la URL de la imagen</small>
+            </div><br>
+            <div class="form-group">
               <label for="precio">Precio:</label>
               <input
                 type="number"
@@ -97,6 +110,7 @@
           titulo: "",
           autor: "",
           descripcion: "",
+          imagen: "",
           precio: 0,
           stock: 0,
           categoriaID: null, // Agrega este campo para almacenar el ID de la categoría
@@ -111,6 +125,7 @@
           titulo: this.form.titulo,
           autor: this.form.autor,
           descripcion: this.form.descripcion,
+          imagen: this.form.imagen,
           precio: this.form.precio,
           stock: this.form.stock,
           categoriaID: this.form.categoriaID, // Utiliza el ID del rol

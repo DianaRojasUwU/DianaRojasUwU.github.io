@@ -12,7 +12,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <!-- Enlace a la página de contacto -->
-            <router-link to="/contact" class="nav-link">Contacto</router-link>
+            <router-link to="/contacto" class="nav-link">Contacto</router-link>
           </li>
           <li class="nav-item">
             <!-- Enlace a la página "Quiénes somos" -->
@@ -75,9 +75,6 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <router-link to="/" class="nav-link">Inicio</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/libros" class="nav-link">Libros</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/novedades" class="nav-link">Novedades</router-link>
@@ -167,7 +164,7 @@ export default {
 
 <style scoped>
 .bg-custom {
-  background-color: #3c5154;
+  background-color: #1a081f;
   font-size: 12px;
 }
 
