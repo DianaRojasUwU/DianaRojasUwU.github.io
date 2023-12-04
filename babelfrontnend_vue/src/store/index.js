@@ -63,6 +63,7 @@ export default createStore({
             titulo: libro.titulo,
             autor: libro.autor,
             descripcion: libro.descripcion,
+            imagen: libro.imagen,
             precio: libro.precio,
             stock: libro.stock - totalLibrosComprados,
             categoriaID: libro.categoriaID,
