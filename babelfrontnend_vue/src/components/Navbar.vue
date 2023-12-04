@@ -80,7 +80,7 @@
           <router-link to="/novedades" class="nav-link">Novedades</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/mas-vendidos" class="nav-link"
+          <router-link to="/masvendidos" class="nav-link"
             >Más vendidos</router-link
           >
         </li>

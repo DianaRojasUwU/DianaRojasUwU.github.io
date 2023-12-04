@@ -29,6 +29,11 @@ const routes = [
     component: () => import('../views/contacto.vue')
   },
   {
+    path: '/recomendados',
+    name: 'recomendados',
+    component: () => import('../views/recomendados.vue')
+  },
+  {
     path: '/libros/:id',
     name: 'detalleLibro',
     component: () => import('../views/vistapreventa.vue')
@@ -37,6 +42,11 @@ const routes = [
     path: '/resultados',
     name: 'resultadosbusqueda',
     component: () => import('../views/ResultadosBusqueda.vue')
+  },
+  {
+    path: '/masvendidos',
+    name: 'masvendidos',
+    component: () => import('../views/masvendidos.vue')
   },
   {
     path: '/Carrito',
