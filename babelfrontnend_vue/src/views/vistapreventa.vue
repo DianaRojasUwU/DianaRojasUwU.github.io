@@ -3,7 +3,7 @@
     <div class="row">
       <!-- Columna para la imagen del libro -->
       <div class="col-md-3 col-12 text-center">
-        <img src="../assets/enigmanocturno.jpg" alt="Portada del libro" class="img-fluid libro-imagen" />
+        <img :src="libro.imagen" alt="Portada del libro" class="img-fluid libro-imagen" />
       </div>
       
       <!-- Columna para la información del libro -->

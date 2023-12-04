@@ -1,20 +1,20 @@
 <template>
-  <div>
+  <div class="resultados-busqueda-container">
     <!-- Título de la página -->
-    <h2 class="text-start mb-4">Resultados de la búsqueda</h2>
+    <h2 class="text-center mb-4">Resultados de la búsqueda</h2>
     
     <!-- Lista de libros resultantes de la búsqueda -->
-    <div v-if="libros.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
-      <div v-for="libro in libros" :key="libro.id" class="col mb-4">
+    <div v-if="libros.length > 0" class="row">
+      <div v-for="libro in libros" :key="libro.id" class="col-lg-3 mb-4">
         <div class="card libro-card">
           <!-- Imagen del libro -->
           <img :src="libro.imagen" class="card-img-top rounded" :alt="libro.titulo">
           
           <!-- Contenido del libro -->
           <div class="card-body">
-            <h5 class="card-title">{{ libro.titulo }}</h5>
+            <h5 class="card-title">{{ truncateText(libro.titulo, 20) }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ libro.autor }}</h6>
-            <p class="card-text precio">{{ libro.precio }}</p>
+            <p class="card-text precio">$ {{ libro.precio }} MXN</p>
             
             <!-- Botón para mostrar el estado de stock -->
             <button class="btn btn-stock" :class="{ 'con-stock': libro.stock > 0, 'sin-stock': libro.stock <= 0 }">
@@ -56,12 +56,53 @@ export default {
     getStockText(stock) {
       return stock > 0 ? 'Con Stock' : 'Sin Stock';
     },
+    // Método para truncar el texto y añadir elipsis si es necesario
+    truncateText(text, maxLength) {
+      if (text.length > maxLength) {
+        return text.slice(0, maxLength) + '...';
+      }
+      return text;
+    },
   },
 };
 </script>
 
-  
-  <style scoped>
-  /* Estilos específicos para la vista de resultados si es necesario */
-  </style>
-  
+<style scoped>
+/* Estilos específicos para la vista de resultados */
+.resultados-busqueda-container {
+  padding: 20px;
+}
+
+.card {
+  /* Tamaño constante para las tarjetas */
+  width: 100%;
+}
+
+/* Estilos adicionales para diseño */
+.libro-card {
+  border: 1px solid #ddd; /* Borde ligero */
+  border-radius: 8px; /* Bordes redondeados */
+  overflow: hidden; /* Evitar que la imagen sobresalga */
+}
+
+.card-img-top {
+  max-height: 200px; /* Altura máxima de la imagen */
+  object-fit: cover; /* Cubrir completamente el contenedor */
+}
+
+.btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn-stock {
+  /* Estilo para el botón de stock */
+  border: 1px solid #ddd;
+}
+
+.btn-detalles {
+  /* Estilo para el botón de detalles */
+  background-color: #555;
+  color: white;
+}
+</style>

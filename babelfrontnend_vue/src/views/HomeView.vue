@@ -120,7 +120,7 @@
         <div class="col libromes">
           <img
             class="img-fluid img"
-            src="https://www.gandhi.com.mx/media/wysiwyg/libro_mes_ken_follet_nov_2023.jpg"
+            src="../assets/Libro del mes.svg"
             alt=""
           />
         </div>
