@@ -84,17 +84,47 @@
     </Carousel>
 
     <!-- Libro del mes -->
-    <div class="container text-center">
+    <div class="container-fluid text-center">
       <div class="row">
         <div class="col libromes">
-          <img class="img-fluid" src="https://www.gandhi.com.mx/media/wysiwyg/libro_mes_ken_follet_nov_2023.jpg" alt="">
+          <img class="img-fluid img" src="https://www.gandhi.com.mx/media/wysiwyg/libro_mes_ken_follet_nov_2023.jpg" alt="">
         </div>
-        <div class="col libromes">
-          2 of 2
+        <div class="col libromes d-flex justify-content-center align-items-center"
+          style="background-color: rgb(226, 224, 224);">
+          <div class="container">
+            <p class="fs-6 text-start">Libro del mes</p>
+            <p class="fs-2 text-start font-weight-bold">Triste corazon oscuro.</p>
+            <p class="fs-5 text-start">"Louisa Reid nos presenta una conmovedora historia que destaca la fuerza de los
+              lazos fraternales. A pesar de la pérdida, Hephziba encuentra valentía para reconstruir su vida."</p>
+          </div>
         </div>
       </div>
     </div>
-    
+
+    <!-- +cultura, recomendaciones, entrevistas, cultura, promociones -->
+    <div class="container-block space">
+      <h1>Eventos y noticias</h1>
+      <Carousel v-bind="settings" :breakpoints="breakpoints">
+      <Slide v-for="evento in eventos" :key="evento.id" class="col mb-6">
+        <div class="card evento-card">
+          <div>
+            <img :src="evento.imagen" class="card-img-top rounded container-fluid" alt="Portada del evento"
+              style="margin-top: 18px; width: 20rem;">
+          </div>
+          <div class="card-body container-block" style=" width: 20rem;">
+            <h5 class="card-title scrolling-text">{{ evento.titulo }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ evento.descripcion }}</h6>
+            <p class="card-text precio">{{ evento.ubicacion }}</p>
+            <button class="btn btn-detalles" @click="verDetalles(evento.id)">Detalles</button>
+          </div>
+        </div>
+      </Slide>
+
+      <template #addons>
+        <Navigation />
+      </template>
+    </Carousel>
+    </div>
     <!-- fin -->
   </div>
 </template>
@@ -117,6 +147,7 @@ export default {
   data() {
     return {
       libros: [],
+      eventos: [],
     };
   },
   // carousel settings
@@ -141,6 +172,7 @@ export default {
   mounted() {
     // Llama al método para obtener la lista de libros al cargar el componente
     this.obtenerLibros();
+    this.obtenerEventosNoticias();
   },
   methods: {
     async obtenerLibros() {
@@ -153,6 +185,18 @@ export default {
 
         // Almacena la lista de libros filtrada en el estado local
         this.libros = librosFiltrados;
+      } catch (error) {
+        console.error("Error al obtener libros:", error);
+      }
+    },
+    async obtenerEventosNoticias() {
+      try {
+        // Realiza una solicitud GET para obtener la lista de libros desde la API
+        const response = await axios.get("https://localhost:7102/api/eventosnoticias");
+
+        // Almacena la lista de libros filtrada en el estado local
+        this.eventos = response.data;
+        console.log(this.eventos);
       } catch (error) {
         console.error("Error al obtener libros:", error);
       }
@@ -180,7 +224,10 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+.img{
+  width: 100%;
+  height: 100%;
+}
 .contenedor {
   background-color: #ebc288;
   text-align: center;
@@ -189,11 +236,8 @@ export default {
 }
 
 .libromes {
-  background-color: rgb(157, 155, 155);
   text-align: center;
-  padding: 20px;
-  border-radius: 5px;
-  
+
 }
 
 .linktext {
