@@ -1,34 +1,30 @@
 <template>
-  <div id="carouselExampleIndicators" class="carousel slide">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  <section class="contact-us-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase mb-4">Contáctanos</h2>
+          <p class="text-muted">¿Necesitas más información sobre nuestros productos o servicios? Estamos aquí para ayudarte.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="contact-info">
+            <i class="bi bi-envelope-fill icon"></i>
+            <p class="email">
+              <strong>Correo Electrónico:</strong><br>
+              <a href="mailto:booktown@babel.libros.mx">booktown@babel.libros.mx</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12 text-center">
+          <p class="text-muted">Agradecemos tu interés y preferencia.</p>
+        </div>
+      </div>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="../assets/1.svg" class="d-block w-100" alt="Slide 1">
-      </div>
-      <div class="carousel-item">
-        <img src="../assets/2.svg" class="d-block w-100" alt="Slide 2">
-      </div>
-      <div class="carousel-item">
-        <img src="../assets/3.svg" class="d-block w-100" alt="Slide 3">
-      </div>
-      <div class="carousel-item">
-        <img src="../assets/4.svg" class="d-block w-100" alt="Slide 3">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -36,15 +32,47 @@ export default {
   name: 'Contacto'
 }
 </script>
-<style>
-.carousel-item img {
-  max-height: 500px;
-  object-fit: fill;
+
+<style scoped>
+.contact-us-section {
+  padding: 80px 0;
 }
 
-@media (max-width: 768px) {
-  .carousel-item img {
-    max-height: 300px; /* Ajusta la altura deseada para dispositivos móviles */
-  }
+.section-heading {
+  font-size: 2.5rem;
+  color: #333; /* Cambiado a un gris más oscuro */
+}
+
+.text-muted {
+  color: #777; /* Gris más claro */
+}
+
+.contact-info {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.icon {
+  font-size: 3rem; /* Aumenté el tamaño del icono */
+  margin-bottom: 1rem; /* Espaciado inferior */
+  color: #007bff; /* Color azul */
+  transition: color 0.3s ease;
+}
+
+.email {
+  margin-top: 0.5rem; /* Espaciado superior para el correo electrónico */
+}
+
+a {
+  color: #007bff; /* Azul, puedes cambiarlo */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.icon:hover {
+  color: #0056b3; /* Cambia el color del icono al hacer hover */
 }
 </style>

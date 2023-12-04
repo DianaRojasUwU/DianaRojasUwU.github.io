@@ -88,15 +88,7 @@
           <router-link to="/recomendados" class="nav-link"
             >Recomendados</router-link
           >
-        </li>
-        <li class="nav-item">
-          <router-link to="/noticias-eventos" class="nav-link"
-            >Noticias/Eventos</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <router-link to="/ofertas" class="nav-link">Ofertas</router-link>
-        </li>
+        </li>        
       </ul>
     </div>
   </nav>
